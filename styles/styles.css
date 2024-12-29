@@ -67,7 +67,10 @@ code table {
     }
     .tl-link {
         @apply text-black dark:text-white underline underline-offset-8
-decoration-1 hover:decoration-2 decoration-sky-500 dark:decoration-sky-400
+decoration-1 hover:decoration-2 decoration-sky-500 dark:decoration-sky-400 font-fira
+    }
+    .tl-anchor {
+        @apply text-sky-500 dark:text-sky-400 font-fira
     }
     .row {
         @apply flex flex-row
