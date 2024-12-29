@@ -1,16 +1,15 @@
 name = "tranquil"
-description = "A blog theme for zola, simple and clean"
+description = "My fork of the Zola theme 'tranquil' by TeaDrinkingProgrammer"
 license = "MIT"
-homepage = "https://github.com/TeaDrinkingProgrammer/tranquil"
-min_version = "0.9.0"
-demo = "https://teadrinkingprogrammer.github.io/tranquil-demo/"
+homepage = "https://github.com/helibom/tranquil"
+min_version = "0.1.0"
 
 [author]
+author = "helibom"
+homepage = "https://github.com/helibom"
+repo = "https://github.com/helibom/tranquil"
+
+[original]
 name = "TeaDrinkingProgrammer"
 homepage = "https://github.com/TeaDrinkingProgrammer"
 repo = "https://github.com/TeaDrinkingProgrammer/tranquil"
-
-[original]
-author = "isunjn"
-homepage = "https://github.com/isunjn"
-repo = "https://github.com/isunjn/serene"
