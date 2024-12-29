@@ -1,7 +1,8 @@
 {% extends "_base.html" %}
 
 {% block page %}projects{% endblock page%}
-{% block lang %}{% if section.extra.lang %}{{ section.extra.lang }}{% else %}{{ section.lang }}{% endif %}{% endblock lang %}
+{% block lang %}{% if section.extra.lang %}{{ section.extra.lang }}{% else %}{{ section.lang }}{% endif %}{% endblock
+lang %}
 {% block title %}{{ section.title }}{% endblock title %}
 {% block desc %}{{ section.description }}{% endblock desc %}
 
@@ -12,24 +13,49 @@
     {% set data = load_data(path="content/projects/data.toml", format="toml") %}
     {% for proj in data.project %}
     <div class="col gap-1 py-3">
-      <h1 class="text-2xl">{{ proj.name }}</h1>
+      <div class="row gap-3">
+        <h1 class="text-2xl">{{ proj.name }}</h1>
+        {% for link in proj.links -%}
+        <a href="{{ link.url }}" target="_blank" rel='noreferrer noopener'>
+          {% set icon_path = "static/icon/" ~ link.icon ~ ".svg" %}
+          {% set icon = load_data(path=icon_path) %}
+          {{ icon | safe }}
+        </a>
+        {% endfor %}
+        {% if not proj.released %}
+        <div class="not-prose">
+          <blockquote id="prerelease-alert"
+            class="row row gap-2 text-black dark:text-white p-2 outline outline-3 outline-fuchsia-500 dark:outline-fuchsia-600"
+            {% set icon = load_data(path="static/icon/alert.svg") %}
+            <span>
+              {{ icon | safe }}
+            </span>
+            <span>
+              prerelease
+            </span>
+          </blockquote>
+        </div>
+        {% endif %}
+      </div>
       <p class="">{{ proj.desc | trim | markdown | safe }}</p>
       <div class="row justify-between">
         <div class="row gap-2 items-end">
           {% for tag in proj.tags %}
-          <div class="text-sm dark:text-slate-400 text-slate-800"><span># </span>{{ tag }}</div>
+          {# <div class="text-sm dark:text-slate-400 text-slate-800"><span># </span>{{ tag }}</div> #}
+          <div class="flex gap-2">
+            {% set tag_slugify = tag | slugify -%}
+            <a class="text-sm text-slate-800 dark:text-slate-400 tl-link"
+              href="{{ config.base_url ~ '/tags/' ~ tag_slugify }}">
+              #{{ tag }}
+            </a>
+          </div>
           {% endfor %}
         </div>
-        <div class="row gap-2">
-          {% for link in proj.links -%}
-          <a class="tl-link" href="{{ link.url }}" target="_blank" rel='noreferrer noopener'>{{ link.name }}</a>
-          {% endfor %}
-        </div>
-      </div>  
+      </div>
     </div>
     {% endfor %}
     {% include "_footer.html" -%}
   </main>
-  
+
 </div>
 {% endblock content %}

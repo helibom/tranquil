@@ -6,21 +6,21 @@
         <img class="h-12" src="{{ config.base_url }}/{{ config.extra.avatar }}" alt="avatar">
         {% endif %}
         <div>
-          {% if config.extra.home %}
-          <a class="text-xl" href="{{ config.base_url }}">{{ config.extra.home }}</a>
+          {% if config.extra.nav_home %}
+          <a class="text-2xl tl-link" href="{{ config.base_url }}">{{ config.extra.nav_home }}</a>
           {% else %}
-          <a class="text-xl" href="{{ config.base_url }}">{{ config.extra.id }}</a>
+          <a class="text-2xl tl-link" href="{{ config.base_url }}">{{ config.extra.id }}</a>
           {% endif %}
           {% if page.path %}
           {% set page_array = page.path | replace(from="/", to=" ") | trim | split(pat=" ") %}
             {% for path in page_array %}
-            <span class="text-xl">{{ config.extra.nav_separator }}</span>
+            <span class="text-2xl">{{ config.extra.nav_separator }}</span>
             {% set current_path = page_array | slice(end=loop.index) | join(sep="/")%}
-            <a class="text-xl" href="{{ config.base_url }}/{{current_path}}">{{ path }}</a>
+            <a class="text-2xl tl-link" href="{{ config.base_url }}/{{current_path}}">{{ path }}</a>
             {% endfor %}
           {% elif section.path %}
           <span class="text-xl">{{ config.extra.nav_separator }}</span>
-          <a class="text-xl" href="{{ config.base_url }}{{section.path}}">{{ section.path | replace(from="/", to="")}}</a>
+          <a class="text-2xl tl-link" href="{{ config.base_url }}{{section.path}}">{{ section.path | replace(from="/", to="")}}</a>
           {% endif %}
         </div>
       </nav>

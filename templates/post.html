@@ -46,7 +46,7 @@
     {% set backlink_icon = load_data(path="static/icon/backlink.svg") %}
     <article class="col w-full" id="post" data-backlink-icon="{{ backlink_icon }}">
       <section aria-label="Article Info" class="col pt-7 gap-4 mb-10">
-        <h1 class="text-2xl">{{ page.title }}</h1>
+        <h1 class="text-2xl font-bold">{{ page.title }}</h1>
         <div class="row justify-between">
           <div>
             <span id="publish" class="text-lg text-stone-400">{{ page.date | date }}</span>
@@ -61,7 +61,7 @@
           <div class="flex gap-2">
             {% for tag in page.taxonomies.tags -%}
             {% set tag_slugify = tag | slugify -%}
-            <a class="text-lg tl-link" href="{{ config.base_url ~ '/tags/' ~ tag_slugify }}"># {{ tag }}</a>
+            <a class="text-lg tl-link" href="{{ config.base_url ~ '/tags/' ~ tag_slugify }}">#{{ tag }}</a>
             {%- endfor %}
           </div>
           {% endif %}
@@ -87,25 +87,7 @@
       </section>
       {% if page.extra.toc is defined %}{% set show_toc = page.extra.toc %}{% else %}{% set show_toc = config.extra.toc %}{% endif %}
       {% if show_toc and page.toc %}
-      <section aria-label="Table of Contents" class="bg-stone-200 dark:bg-stone-800 p-4 rounded-lg mb-10">
-        <h2 class="text-2xl pb-3">Contents:</h2>
-        <ul class="col gap-3">
-          {% for h2 in page.toc %}
-          <li>
-            <a class="text-black dark:text-white text-xl underline underline-offset-8 decoration-1 hover:decoration-2 decoration-sky-500 dark:decoration-sky-400" href="#{{ h2.id | safe }}">{{ h2.title }}</a>
-            {% if h2.children %}
-            <ul class="col gap-2 pl-2 pt-3">
-              {% for h3 in h2.children %}
-              <li>
-                <a class=" text-lg tl-link" href="#{{ h3.id | safe }}">{{ h3.title }}</a>
-              </li>
-              {% endfor %}
-            </ul>
-            {% endif %}
-          </li>
-          {% endfor %}
-        </ul>
-      </section>
+        {% include "_toc.html" %}
       {% endif %}
       <section aria-label="Article" class="tl-prose">
         {% if page.extra.truncate_summary is defined %}{% set truncate_summary = page.extra.truncate_summary %}{% elif section.extra.truncate_summary is defined %}{% set truncate_summary = section.extra.truncate_summary %}{% else %}{% set truncate_summary = false %}{% endif %}

@@ -1,0 +1,19 @@
+<section aria-label="Table of Contents" class=" p-4 rounded-lg mb-10">
+    <ul class="col gap-3">
+        {% for h2 in page.toc %}
+        <li>
+            <a class="text-black dark:text-white text-xl underline underline-offset-8 decoration-1 hover:decoration-2 decoration-sky-500 dark:decoration-sky-400"
+                href="#{{ h2.id | safe }}">{{ h2.level}}. {{ h2.title }}</a>
+            {% if h2.children %}
+            <ul class="col gap-2 pl-2 pt-3">
+                {% for h3 in h2.children %}
+                <li>
+                    <a class=" text-xs tl-link" href="#{{ h3.id | safe }}">{{ h2.level}}.{{ h3.level}}. {{ h3.title }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+</section>

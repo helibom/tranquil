@@ -6,31 +6,36 @@
 {% block desc %}{{ config.description }}{% endblock desc %}
 
 {% block content %}
+{% set bio = load_data(path=config.extra.bio_path) %}
 <div class="flex items-center justify-center">
   <main class="py-24 p-6 max-w-prose">
     <section class="row gap-3">
       {% if config.extra.avatar %}
         <img class="h-24" src="{{ config.base_url }}/{{ config.extra.avatar }}" alt="avatar">
       {% endif %}
-      <div class="col gap-2" id="text">
+      <div class="col" id="text">
         <div class="col md:flex-row gap-2">
-          <span>{{ config.extra.name }}</span>
+          {% set moon_icon = load_data(path="static/icon/moon.svg") %}
+          {% set sun_icon = load_data(path="static/icon/sun.svg") %}
+          <button class="text-lg tl-link" id="theme-toggle" aria-label="theme switch" data-moon-icon="{{ moon_icon }}" data-sun-icon="{{ sun_icon }}">
+            {{ moon_icon | safe }}
+          </button>
           {% if config.extra.display_id -%}
-          <span class="text-sky-600 dark:text-sky-300">@{{ config.extra.id }}</span>
+          <span class="text-sky-600 dark:text-sky-300 font-fira text-3xl">{{ config.extra.id }}</span>
           {% endif -%}
         </div>
-        <div class="tl-prose [&>p:first-child]:mt-0"> 
-          {{ config.extra.bio | markdown | safe}}
+        <span class="font-fira">{{ config.extra.name }}</span>
+        <div class="tl-prose [&>p:first-child]:mt-1"> 
+          {{ bio | markdown | safe}}
         </div>
       </div>
     </section>
     <section class="row justify-between py-4">
       <div class="row gap-3">
+        <a class="text-lg tl-link" href="{{ config.base_url }}/contact">contact</a>
+        <a class="text-lg tl-link" href="{{ config.base_url }}/resume">resume</a>
         <a class="text-lg tl-link" href="{{ config.base_url }}/blog">blog</a>
-        
-        {% if config.extra.projects_page -%}
-            <a class="text-lg tl-link" href="{{ config.base_url }}/projects">projects</a>
-        {% endif -%}
+        <a class="text-lg tl-link" href="{{ config.base_url }}/projects">projects</a>
       </div>
       <div class="row gap-2 h-6">
         {% for link in config.extra.links -%}
@@ -40,11 +45,7 @@
             {{ icon | safe }}
           </a>
         {% endfor %}
-        {% set moon_icon = load_data(path="static/icon/moon.svg") %}
-        {% set sun_icon = load_data(path="static/icon/sun.svg") %}
-        <button class="text-lg tl-link" id="theme-toggle" aria-label="theme switch" data-moon-icon="{{ moon_icon }}" data-sun-icon="{{ sun_icon }}">
-          {{ moon_icon | safe }}
-        </button>
+
       </div>
     </section>
     <section class="mb-16 tl-prose">
