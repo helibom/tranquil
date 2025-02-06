@@ -9,7 +9,7 @@ lang %}
 {% block content %}
 {% include "_header.html" %}
 <div id="proj-wrapper" class="flex items-center justify-center">
-  <main class="col max-w-prose pt-7">
+  <main class="w-full px-6 max-w-prose pt-7">
     {% set data = load_data(path="content/projects/data.toml", format="toml") %}
     {% for proj in data.project %}
     <div class="col gap-1 py-3">
