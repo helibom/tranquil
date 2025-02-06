@@ -7,14 +7,10 @@
 
 {% block content %}
 {% set bio = load_data(path=config.extra.bio_path) %}
-<div class="flex items-center justify-center">
-  <main class="py-24 p-6 max-w-prose">
-    <section class="row gap-3">
-      {% if config.extra.avatar %}
-        <img class="h-24" src="{{ config.base_url }}/{{ config.extra.avatar }}" alt="avatar">
-      {% endif %}
+<div class="flex items-center justify-center ">
+  <main class="w-full px-6 sm:px-8 py-24 max-w-prose mx-auto">
       <div class="col" id="text">
-        <div class="col md:flex-row gap-2">
+        <div class="flex-row gap-1">
           {% set moon_icon = load_data(path="static/icon/moon.svg") %}
           {% set sun_icon = load_data(path="static/icon/sun.svg") %}
           <button class="text-lg tl-link" id="theme-toggle" aria-label="theme switch" data-moon-icon="{{ moon_icon }}" data-sun-icon="{{ sun_icon }}">
@@ -28,12 +24,11 @@
         <div class="tl-prose [&>p:first-child]:mt-1"> 
           {{ bio | markdown | safe}}
         </div>
-      </div>
     </section>
-    <section class="row justify-between py-4">
-      <div class="row gap-3">
+    <section class="row justify-between flex-wrap py-4 gap-y-4">
+      <div class="row gap-3 flex-wrap">
         <a class="text-lg tl-link" href="{{ config.base_url }}/contact">contact</a>
-        <a class="text-lg tl-link" href="{{ config.base_url }}/docs/cv.pdf">resume</a>
+        <a class="text-lg tl-link" href="{{ config.base_url }}/resume">resume</a>
         <a class="text-lg tl-link" href="{{ config.base_url }}/blog">blog</a>
         <a class="text-lg tl-link" href="{{ config.base_url }}/projects">projects</a>
       </div>
